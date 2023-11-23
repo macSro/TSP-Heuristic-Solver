@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="90b3b055-a102-4cef-85fa-45f1ce8ebc17" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SI1/.classpath" beforeDir="false" afterPath="$PROJECT_DIR$/SI1/.classpath" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SI1/.settings/org.eclipse.jdt.core.prefs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SI1/bin/tsp/AlgorytmGenetyczny.class" beforeDir="false" afterPath="$PROJECT_DIR$/SI1/bin/tsp/AlgorytmGenetyczny.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SI1/bin/tsp/AlgorytmLosowy.class" beforeDir="false" afterPath="$PROJECT_DIR$/SI1/bin/tsp/AlgorytmLosowy.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SI1/bin/tsp/AlgorytmZachlanny.class" beforeDir="false" afterPath="$PROJECT_DIR$/SI1/bin/tsp/AlgorytmZachlanny.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SI1/bin/tsp/Instancja.class" beforeDir="false" afterPath="$PROJECT_DIR$/SI1/bin/tsp/Instancja.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SI1/bin/tsp/Krzyzowanie.class" beforeDir="false" afterPath="$PROJECT_DIR$/SI1/bin/tsp/Krzyzowanie.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SI1/bin/tsp/KrzyzowanieOX.class" beforeDir="false" afterPath="$PROJECT_DIR$/SI1/bin/tsp/KrzyzowanieOX.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SI1/bin/tsp/Miasto.class" beforeDir="false" afterPath="$PROJECT_DIR$/SI1/bin/tsp/Miasto.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SI1/bin/tsp/Mutacja.class" beforeDir="false" afterPath="$PROJECT_DIR$/SI1/bin/tsp/Mutacja.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SI1/bin/tsp/MutacjaInwersja.class" beforeDir="false" afterPath="$PROJECT_DIR$/SI1/bin/tsp/MutacjaInwersja.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SI1/bin/tsp/MutacjaSwap.class" beforeDir="false" afterPath="$PROJECT_DIR$/SI1/bin/tsp/MutacjaSwap.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SI1/bin/tsp/Osobnik.class" beforeDir="false" afterPath="$PROJECT_DIR$/SI1/bin/tsp/Osobnik.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SI1/bin/tsp/Populacja.class" beforeDir="false" afterPath="$PROJECT_DIR$/SI1/bin/tsp/Populacja.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SI1/bin/tsp/Selekcja.class" beforeDir="false" afterPath="$PROJECT_DIR$/SI1/bin/tsp/Selekcja.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SI1/bin/tsp/SelekcjaRuletka.class" beforeDir="false" afterPath="$PROJECT_DIR$/SI1/bin/tsp/SelekcjaRuletka.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SI1/bin/tsp/SelekcjaTurniej.class" beforeDir="false" afterPath="$PROJECT_DIR$/SI1/bin/tsp/SelekcjaTurniej.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SI1/bin/tsp/TSP.class" beforeDir="false" afterPath="$PROJECT_DIR$/SI1/bin/tsp/TSP.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SI1/bin/tsp/Wynik.class" beforeDir="false" afterPath="$PROJECT_DIR$/SI1/bin/tsp/Wynik.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SI1/bin/tsp_narzedzia/Narzedzia.class" beforeDir="false" afterPath="$PROJECT_DIR$/SI1/bin/tsp_narzedzia/Narzedzia.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SI1/src/tsp/AlgorytmGenetyczny.java" beforeDir="false" afterPath="$PROJECT_DIR$/SI1/src/tsp/AlgorytmGenetyczny.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SI1/src/tsp/AlgorytmZachlanny.java" beforeDir="false" afterPath="$PROJECT_DIR$/SI1/src/tsp/AlgorytmZachlanny.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SI1/src/tsp/Instancja.java" beforeDir="false" afterPath="$PROJECT_DIR$/SI1/src/tsp/Instancja.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SI1/src/tsp/MutacjaInwersja.java" beforeDir="false" afterPath="$PROJECT_DIR$/SI1/src/tsp/MutacjaInwersja.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SI1/src/tsp/MutacjaSwap.java" beforeDir="false" afterPath="$PROJECT_DIR$/SI1/src/tsp/MutacjaSwap.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SI1/src/tsp/Osobnik.java" beforeDir="false" afterPath="$PROJECT_DIR$/SI1/src/tsp/Osobnik.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SI1/src/tsp/TSP.java" beforeDir="false" afterPath="$PROJECT_DIR$/SI1/src/tsp/TSP.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "customColor": "",
+  "associatedIndex": 7
+}]]></component>
+  <component name="ProjectId" id="2YX1ThUoiYIm4PANKQ6Ok5o5slo" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "master",
+    "last_opened_file_path": "C:/Users/Maciek/Desktop/Nauka/Projekty/si3/SI3_4"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="90b3b055-a102-4cef-85fa-45f1ce8ebc17" name="Changes" comment="" />
+      <created>1700657121708</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1700657121708</updated>
+    </task>
+    <servers />
+  </component>
+</project>

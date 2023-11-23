@@ -1,15 +1,8 @@
 package tsp;
 
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStreamWriter;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Optional;
-import java.util.Random;
-
 import javax.imageio.ImageIO;
 import javafx.application.Application;
 import javafx.embed.swing.SwingFXUtils;
@@ -20,6 +13,7 @@ import javafx.scene.SnapshotParameters;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
+import javafx.scene.chart.XYChart.Series;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
@@ -32,7 +26,7 @@ import javafx.scene.image.WritableImage;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import tsp_narzedzia.Narzedzia;
+import utils.Utils;
 
 public class TSP extends Application{
 	
@@ -56,170 +50,195 @@ public class TSP extends Application{
 		layout1.setVgap(8);
 		layout1.setHgap(6);
 		
-		Label etykieta_rp = new Label("Rozmiar populacji: ");
-		TextField rozmiarPopulacji = new TextField();
-		rozmiarPopulacji.setMaxWidth(80);
-		rozmiarPopulacji.setText("100");
-		layout1.setConstraints(etykieta_rp, 0, 0);
-		layout1.setConstraints(rozmiarPopulacji, 1, 0);
+		Label lGenerations = new Label("Generations: ");
+		TextField tfGenerations = new TextField();
+		tfGenerations.setMaxWidth(100);
+		tfGenerations.setText("500");
+		GridPane.setConstraints(lGenerations, 0, 0);
+		GridPane.setConstraints(tfGenerations, 1, 0);
 		
-		Label etykieta_lg = new Label("Liczba generacji: ");
-		TextField liczbaGeneracji = new TextField();
-		liczbaGeneracji.setMaxWidth(80);
-		liczbaGeneracji.setText("500");
-		layout1.setConstraints(etykieta_lg, 0, 1);
-		layout1.setConstraints(liczbaGeneracji, 1, 1);
+		Label lPopulationSize = new Label("Population size: ");
+		TextField tfPopulationSize = new TextField();
+		tfPopulationSize.setMaxWidth(100);
+		tfPopulationSize.setText("100");
+		GridPane.setConstraints(lPopulationSize, 0, 1);
+		GridPane.setConstraints(tfPopulationSize, 1, 1);
 		
-		Label etykieta_px = new Label("Prawdopodobienstwo krzyzowania: ");
-		TextField pX = new TextField();
-		pX.setMaxWidth(80);
-		pX.setText("0.7");
-		layout1.setConstraints(etykieta_px, 0, 2);
-		layout1.setConstraints(pX, 1, 2);
+		Label lSelection = new Label("Selection: ");
+		ChoiceBox<String> choiceSelection = new ChoiceBox<>();
+		choiceSelection.setMaxWidth(100);
+		choiceSelection.getItems().addAll("Tournament", "Roulette");
+		choiceSelection.setValue("Tournament");
+		GridPane.setConstraints(lSelection, 0, 2);
+		GridPane.setConstraints(choiceSelection, 1, 2);
 		
-		Label etykieta_pm = new Label("Prawdopodobienstwo mutacji: ");
-		TextField pM = new TextField();
-		pM.setMaxWidth(80);
-		pM.setText("0.1");
-		layout1.setConstraints(etykieta_pm, 0, 3);
-		layout1.setConstraints(pM, 1, 3);
+		Label lTournamentSize = new Label("Tournament size (ignored when Roulette): ");
+		TextField tfTournamentSize = new TextField();
+		tfTournamentSize.setMaxWidth(100);
+		tfTournamentSize.setText("5");
+		GridPane.setConstraints(lTournamentSize, 0, 3);
+		GridPane.setConstraints(tfTournamentSize, 1, 3);
 		
-		Label etykieta_nt = new Label("Rozmiar turnieju: ");
-		TextField nTurnieju = new TextField();
-		nTurnieju.setMaxWidth(80);
-		nTurnieju.setText("5");
-		layout1.setConstraints(etykieta_nt, 0, 4);
-		layout1.setConstraints(nTurnieju, 1, 4);
+		Label lMutation = new Label("Mutation: ");
+		ChoiceBox<String> choiceMutation = new ChoiceBox<>();
+		choiceMutation.setMaxWidth(100);
+		choiceMutation.getItems().addAll("Inversion", "Swap");
+		choiceMutation.setValue("Inversion");
+		GridPane.setConstraints(lMutation, 0, 4);
+		GridPane.setConstraints(choiceMutation, 1, 4);
 		
-		Label etykieta_plik = new Label("Plik: ");
-		ChoiceBox<String> wyborPliku = new ChoiceBox();
-		wyborPliku.setMaxWidth(80);
-		wyborPliku.getItems().addAll("berlin11_modified", "berlin52", "kroA100", "kroA150", "kroA200", "fl417", "ali535", "gr666");
-		wyborPliku.setValue("berlin52");
-		layout1.setConstraints(etykieta_plik, 0, 5);
-		layout1.setConstraints(wyborPliku, 1, 5);
+		Label lProbabilityCrossover = new Label("Crossover probability: ");
+		TextField tfProbabilityCrossover = new TextField();
+		tfProbabilityCrossover.setMaxWidth(100);
+		tfProbabilityCrossover.setText("0.7");
+		GridPane.setConstraints(lProbabilityCrossover, 0, 5);
+		GridPane.setConstraints(tfProbabilityCrossover, 1, 5);
 		
-		Button przyciskParametry = new Button("Rozpocznij");
-		przyciskParametry.setOnAction(e -> {
-			przycisk1(rozmiarPopulacji.getText(), liczbaGeneracji.getText(), pX.getText(), pM.getText(), nTurnieju.getText(), wyborPliku.getValue());
+		Label lProbabilityMutation = new Label("Mutation probability: ");
+		TextField tfProbabilityMutation = new TextField();
+		tfProbabilityMutation.setMaxWidth(100);
+		tfProbabilityMutation.setText("0.1");
+		GridPane.setConstraints(lProbabilityMutation, 0, 6);
+		GridPane.setConstraints(tfProbabilityMutation, 1, 6);
+		
+		Label lInputFileName = new Label("Input file: ");
+		ChoiceBox<String> choiceInputFileName = new ChoiceBox<>();
+		choiceInputFileName.setMaxWidth(100);
+		choiceInputFileName.getItems().addAll("berlin11_modified", "berlin52", "kroA100", "kroA150", "kroA200", "fl417", "ali535", "gr666");
+		choiceInputFileName.setValue("berlin52");
+		GridPane.setConstraints(lInputFileName, 0, 7);
+		GridPane.setConstraints(choiceInputFileName, 1, 7);
+		
+		Button bRun = new Button("Run");
+		bRun.setOnAction(e -> {
+			run(tfGenerations.getText(), tfPopulationSize.getText(), choiceSelection.getValue(), tfTournamentSize.getText(), choiceMutation.getValue(), tfProbabilityCrossover.getText(), tfProbabilityMutation.getText(), choiceInputFileName.getValue());
 		});
 		
-		layout1.getChildren().addAll(etykieta_rp, rozmiarPopulacji, etykieta_lg, liczbaGeneracji, etykieta_px, pX, etykieta_pm, pM, etykieta_nt, nTurnieju, etykieta_plik, wyborPliku);
-		layout.getChildren().addAll(layout1, przyciskParametry);
+		layout1.getChildren().addAll(lGenerations, tfGenerations, lPopulationSize, tfPopulationSize, lSelection, choiceSelection, lTournamentSize, tfTournamentSize, lMutation, choiceMutation, lProbabilityCrossover, tfProbabilityCrossover, lProbabilityMutation, tfProbabilityMutation, lInputFileName, choiceInputFileName);
+		layout.getChildren().addAll(layout1, bRun);
 		layout.setAlignment(Pos.CENTER);
 		scene1 = new Scene(layout, 500, 400);
 		
 		window.setScene(scene1);
-		window.setTitle("Algorytm Genetyczny");
+		window.setTitle("Traveling Salesman Problem Solver");
 		window.show();
 	}
 	
-	private void przycisk1(String rP, String lG, String prX, String prM, String n, String p) {
-		try
-	    {
-	      AlgorytmGenetyczny algGen = new AlgorytmGenetyczny(Integer.parseInt(rP), Integer.parseInt(lG), Double.parseDouble(prX), Double.parseDouble(prM), Integer.parseInt(n), p, new SelekcjaTurniej(Integer.parseInt(n)), new KrzyzowanieOX(), new MutacjaInwersja());
-	      algGen.wykonaj();
-	      stworzSceneWyniki(algGen.getWyniki(), algGen.getNajlepszyDystans(), rP, lG, prX, prM, n, p);
+	private void run(String generations, String populationSize, String selection, String tournamentSize, String mutation, String probabilityCrossover, String probabilityMutation, String inputDataFileName) {
+		try {
+			GeneticAlgorithm algorithm = new GeneticAlgorithm(
+				Integer.parseInt(generations),
+				Integer.parseInt(populationSize),
+				selection.equals("Tournament") ? new SelectionTournament(Integer.parseInt(tournamentSize)) : new SelectionRoulette(),
+				new CrossoverOx(),
+				mutation.equals("Inversion") ? new MutationInversion() : new MutationSwap(),
+				Double.parseDouble(probabilityCrossover),
+				Double.parseDouble(probabilityMutation),
+				inputDataFileName
+			);
+			algorithm.execute();
+			showResults(algorithm.getResults(), algorithm.getBestDistance(), generations, populationSize, probabilityCrossover, probabilityMutation, tournamentSize, inputDataFileName);
 	    }
 	    catch (NumberFormatException nfe)
 	    {
-	      System.out.println("NumberFormatException: " + nfe.getMessage());
+	    	Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Input Error");
+            alert.setHeaderText("Wrong input!");
+            alert.setContentText("Please enter correctly formatted numbers. Remeber to use '.' as the decimal point.");
+            alert.showAndWait();
 	    }
 		
 	}
 	
-	private void stworzSceneWyniki(ArrayList<Wynik> wyniki, double naj, String rP, String lG, String prX, String prM, String n, String p) {
+	private void showResults(ArrayList<Result> results, double best, String generations, String populationSize, String probabilityCrossover, String probabilityMutation, String tournamentSize, String inputDataFileName) {
 		
-		window.setTitle("Wykres (" + p + ")");
+		window.setTitle("Results (" + inputDataFileName + ")");
 		VBox layout = new VBox(10);
 		
-		NumberAxis osX = new NumberAxis();
-		osX.setLabel("Nr generacji");
-        NumberAxis osY = new NumberAxis();
-        osY.setLabel("Dystans");
-		LineChart<Number,Number> wykres = new LineChart<Number,Number>(osX,osY);
-		wykres.setTitle("Wykres dzialania EA (" + rP + "x" + lG + "; " + prX + ", " + prM + ", " + n + ")");
+		NumberAxis axisX = new NumberAxis();
+		axisX.setLabel("Generation");
+        NumberAxis axisY = new NumberAxis();
+        axisY.setLabel("Distance");
+		LineChart<Number,Number> chart = new LineChart<Number,Number>(axisX,axisY);
+		chart.setTitle("Calculated distances (" + generations + "x" + populationSize + "; " + probabilityCrossover + ", " + probabilityMutation);
 		
-		XYChart.Series seria_najlepsze = new XYChart.Series();
-		seria_najlepsze.setName("najlepsze");
+		XYChart.Series<Number, Number> seriesWorst = new XYChart.Series<>();
+        seriesWorst.setName("Worst");
+		
+        XYChart.Series<Number, Number> seriesAverage = new XYChart.Series<>();
+        seriesAverage.setName("Average");
         
-        XYChart.Series seria_srednie = new XYChart.Series();
-        seria_srednie.setName("srednie");
+        Series<Number, Number> seriesBest = new XYChart.Series<>();
+		seriesBest.setName("Best");
         
-        XYChart.Series seria_najgorsze = new XYChart.Series();
-        seria_najgorsze.setName("najgorsze");
-        
-        for(int i=0; i<wyniki.size(); i++) {
-        	seria_najlepsze.getData().add(new XYChart.Data(i, wyniki.get(i).getNajlepszy()));
-        	seria_srednie.getData().add(new XYChart.Data(i, wyniki.get(i).getSredni()));
-        	seria_najgorsze.getData().add(new XYChart.Data(i, wyniki.get(i).getNajgorszy()));
+        for(int i=0; i<results.size(); i++) {
+        	seriesWorst.getData().add(new XYChart.Data<Number, Number>(i, results.get(i).getWorst()));
+        	seriesAverage.getData().add(new XYChart.Data<Number, Number>(i, results.get(i).getAverage()));
+        	seriesBest.getData().add(new XYChart.Data<Number, Number>(i, results.get(i).getBest()));
         }
 		
-		wykres.getData().add(seria_najlepsze);
-		wykres.getData().add(seria_srednie);
-		wykres.getData().add(seria_najgorsze);
+		chart.getData().add(seriesWorst);
+		chart.getData().add(seriesAverage);
+		chart.getData().add(seriesBest);
 		
-		wykres.setCreateSymbols(false);
+		chart.setCreateSymbols(false);
 		
-		Label etykieta_naj = new Label("Najlepszy dystans: " + naj);
-		etykieta_naj.setStyle("-fx-font-size: 1.5em; -fx-font-weight:bold;");
+		Label lBest = new Label("Best distance: " + best);
+		lBest.setStyle("-fx-font-size: 1.5em; -fx-font-weight:bold;");
 		
-		Button przycisk_cofnij = new Button("Powrot");
-		przycisk_cofnij.setOnAction(e -> window.setScene(scene1));
+		Button bBack = new Button("Back");
+		bBack.setOnAction(e -> window.setScene(scene1));
 		
-		Button przycisk_zapisz_png = new Button("Zapisz PNG");
+		Button bSavePng = new Button("Save chart as image");
 		
-		TextInputDialog dialog = new TextInputDialog("wykres1");
-		dialog.setTitle("Zapisywanie");
-		dialog.setHeaderText("Zapisywanie wykresu");
-		dialog.setContentText("Podaj nazwe pliku:");
+		TextInputDialog dialog1 = new TextInputDialog("chart1");
+		dialog1.setTitle("Save chart as image");
+		dialog1.setHeaderText("Saving the image");
+		dialog1.setContentText("Enter file name:");
 		
-		przycisk_zapisz_png.setOnAction(e ->{
-			Optional<String> wejscie = dialog.showAndWait();
-			wejscie.ifPresent(nazwa -> {
-				WritableImage png = wykres.snapshot(new SnapshotParameters(), null);
-				File zapis = new File(nazwa + ".png");
+		bSavePng.setOnAction(e ->{
+			dialog1.showAndWait().ifPresent(fileName -> {
+				WritableImage png = chart.snapshot(new SnapshotParameters(), null);
+				File file = new File("results/" + fileName + ".png");
 				try {
-			        ImageIO.write(SwingFXUtils.fromFXImage(png, null), "png", zapis);
+			        ImageIO.write(SwingFXUtils.fromFXImage(png, null), "png", file);
 			    } catch (IOException ex) {
 			        ex.printStackTrace();
 			    }
 			});
 		});
 		
-		Button przycisk_zapisz_excel = new Button("Zapisz EXCEL");
+		Button bSaveCsv = new Button("Save result data");
 		
-		TextInputDialog dialog_excel1 = new TextInputDialog("excel1");
-		dialog_excel1.setTitle("Zapisywanie");
-		dialog_excel1.setHeaderText("Zapisywanie w EXCEL");
-		dialog_excel1.setContentText("Podaj nazwe pliku:");
+		TextInputDialog dialog2 = new TextInputDialog("result1");
+		dialog2.setTitle("Save result data");
+		dialog2.setHeaderText("Saving result data");
+		dialog2.setContentText("Enter file name:");
 		
 		Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-		alert.setHeaderText("Czy chcesz dopisaæ do pliku?");
-		alert.setTitle("Nadpis/Dopis");
+		alert.setTitle("Append");
+		alert.setHeaderText("Do you want to append to the file?");
 		
-		ButtonType okButton = new ButtonType("Tak", ButtonBar.ButtonData.YES);
-		ButtonType noButton = new ButtonType("Nie", ButtonBar.ButtonData.NO);
+		ButtonType bYes = new ButtonType("Yes", ButtonBar.ButtonData.YES);
+		ButtonType bNo = new ButtonType("No", ButtonBar.ButtonData.NO);
 		
-		alert.getButtonTypes().setAll(okButton, noButton);
+		alert.getButtonTypes().setAll(bYes, bNo);
 		
-		przycisk_zapisz_excel.setOnAction(e ->{
+		bSaveCsv.setOnAction(e ->{
 			alert.showAndWait().ifPresent(type -> {
-		        if (type == okButton) {
-		        	Optional<String> wejscie = dialog_excel1.showAndWait();
-					wejscie.ifPresent(nazwa -> {
-						Narzedzia.zapiszExcelCSV(wyniki, nazwa, true, p, rP, lG, prX, prM, n);
+		        if (type == bYes) {
+					dialog2.showAndWait().ifPresent(fileName -> {
+						Utils.saveCsv(results, fileName, true, inputDataFileName, generations, populationSize, probabilityCrossover, probabilityMutation, tournamentSize);
 					});
-		        } else if (type == noButton) {
-		        	Optional<String> wejscie = dialog_excel1.showAndWait();
-					wejscie.ifPresent(nazwa -> {
-						Narzedzia.zapiszExcelCSV(wyniki, nazwa, false, p, rP, lG, prX, prM, n);
+		        } else if (type == bNo) {
+		        	dialog2.showAndWait().ifPresent(fileName -> {
+						Utils.saveCsv(results, fileName, false, inputDataFileName, generations, populationSize, probabilityCrossover, probabilityMutation, tournamentSize);
 					});
 		        }
 			});
 		});
 		
-		layout.getChildren().addAll(przycisk_cofnij, wykres, etykieta_naj, przycisk_zapisz_png, przycisk_zapisz_excel);
+		layout.getChildren().addAll(bBack, chart, lBest, bSavePng, bSaveCsv);
 		layout.setAlignment(Pos.CENTER);
 		
 		scene2 = new Scene(layout, 800, 600);
