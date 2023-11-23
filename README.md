@@ -20,22 +20,12 @@
       </ul>
     </li>
     <li>
-        <a href="#usage">Usage</a>
-        <ul>
-            <li><a href="#instructions">Instructions</a></li>
-            <li><a href="#rules">Rules</a></li>
-            <li><a href="#controls">Controls</a></li>
-            <li><a href="#settings">Settings</a></li>
-            <li>
-                <a href="#game-modes">Game Modes</a>
-                <ul>
-                    <li><a href="#user-vs-ai">User vs AI</a></li>
-                    <li><a href="#user-vs-user">User vs User</a></li>
-                    <li><a href="#ai-vs-ai">AI vs AI</a></li>
-                </ul>
-            </li>
-            <li><a href="#benchmarking">Benchmarking</a></li>
-        </ul>
+      <a href="#usage">Usage</a>
+      <ul>
+        <li><a href="#disclaimer">Disclaimer</a></li>
+          <li><a href="#results">Results</a></li>
+          <li><a href="#demo">Controls</a></li>
+      </ul>
     </li>
   </ol>
 </details>
