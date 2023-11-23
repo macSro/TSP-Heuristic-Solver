@@ -24,7 +24,7 @@
       <ul>
         <li><a href="#disclaimer">Disclaimer</a></li>
           <li><a href="#results">Results</a></li>
-          <li><a href="#demo">Controls</a></li>
+          <li><a href="#demo">Demo</a></li>
       </ul>
     </li>
   </ol>
