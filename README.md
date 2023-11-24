@@ -111,7 +111,7 @@ The simplest way to run the application is with the IDE's Run button or a keyboa
 The application offers the following GUI:
 
 <div align="center">
-  <img src="img/gui.png" style="width: 60vw;" alt="GUI">
+  <img src="img/gui.png" width="400" alt="GUI">
 </div>
 
 * Generations: _How many iterations of the algorithm?_
@@ -133,7 +133,7 @@ The application offers the following GUI:
 Here's an example:
 
 <div align="center">
-  <img src="img/data.png" style="width: 60vw;" alt="Data file example">
+  <img src="img/data.png" width="400" alt="Data file example">
 </div>
 
 ### Disclaimer
@@ -153,9 +153,9 @@ Initialization of the first population is based on two algorithms: Greedy and Ra
 As soon as the algorithm finishes running, the following popup is displayed with a chart visualization of its performance. If needed the chart can be saved in _.png_ format or raw data can be saved in _.csv_ format instead. The location of saved files is the ```results``` directory.
 
 <div align="center">
-  <img src="img/gui_result.png" style="width: 60vw;" alt="Performance visualization">
+  <img src="img/gui_result.png" height="300" alt="Performance visualization">
 
-  <img src="img/result_data.png" style="width: 60vw;" alt="Raw result data in CSV">
+  <img src="img/result_data.png" height="300" alt="Raw result data in CSV">
 </div>
 
 ### Demo
